@@ -1,6 +1,7 @@
 {
     "name": "ci2lara/codeigniter_migration",
     "description": "CodeigniterMigration is a package to integrate an already started Codeigniter-Session in Laravel 5",
+    "keywords": ["laravel", "codeigniter", "ci", "session"],
     "license": "MIT",
     "authors": [
         {
@@ -8,5 +9,8 @@
             "email": "schwinger@dbphp.de"
         }
     ],
-    "require": {}
+    "require": {
+        "php": ">=5.3",
+        "laravel/framework": "5.1.*"
+    }
 }
