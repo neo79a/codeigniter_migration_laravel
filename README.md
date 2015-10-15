@@ -29,21 +29,23 @@ After updating composer (composer update), add the ServiceProvider to the provid
 
 
 
-### config.app.php / Providers-Array
+### Add the ServiceProvider
+
+Add the ServiceProvider to config/app.php (Provider-Array)
 
 ```
 'Ci2Lara\Codeigniter_Migration\Providers\CodeigniterServiceProvider',
 ```
 
 
-Also add this to your facades in app.php (Class Aliases):
+Also add this to your facades in config/app.php (Class-Aliases-Array):
 
 ```
 'CodeigniterSession' => 'Ci2Lara\Codeigniter_Migration\Facades\CodeigniterSession',  
 ```
 
 
-### CI-Configuration (sess_table_name & sess_cookie_name)
+### CI-Configuration
 
 Copy the package config to your local config with the publish command:
 
