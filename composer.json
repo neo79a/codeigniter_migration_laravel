@@ -1,0 +1,11 @@
+{
+    "name": "ci2lara/codeigniter_migration",
+    "description": "Description here",
+    "authors": [
+        {
+            "name": "Andreas Schwinger",
+            "email": "schwinger@melosgmbh.de"
+        }
+    ],
+    "require": {}
+}
