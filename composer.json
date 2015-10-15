@@ -1,6 +1,7 @@
 {
     "name": "ci2lara/codeigniter_migration",
     "description": "CodeigniterMigration is a package to integrate an already started Codeigniter-Session in Laravel 5",
+    "licence": "MIT",
     "authors": [
         {
             "name": "Andreas Schwinger",
