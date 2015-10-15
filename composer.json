@@ -12,5 +12,11 @@
     "require": {
         "php": ">=5.3",
         "laravel/framework": "5.1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ci2Lara\\Codeigniter_Migration\\": "src/"
+        ,
     }
+
 }
