@@ -13,6 +13,9 @@ class CodeigniterServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+        require __DIR__ . '/../../vendor/autoload.php';
+
         // copy empty (but commented) default to root/config-Directory
         $this->publishes([
             __DIR__ . '/../Config/ci_session_default.php' => config_path('ci_session.php'),
