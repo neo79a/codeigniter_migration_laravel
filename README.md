@@ -28,24 +28,35 @@ After updating composer (composer update), add the ServiceProvider to the provid
 
 
 
+### Service Provider
 
-### Add the ServiceProvider
+In your app config, add the `CodeigniterServiceProvider` to the providers array.
 
-Add the ServiceProvider to config/app.php (Provider-Array)
-
-```
-'Ci2Lara\Codeigniter_Migration\Providers\CodeigniterServiceProvider',
-```
-
-
-Also add this to your facades in config/app.php (Class-Aliases-Array):
-
-```
-'CodeigniterSession' => 'Ci2Lara\Codeigniter_Migration\Facades\CodeigniterSession',  
+```php
+'providers' => [
+   ...
+    'Ci2Lara\Codeigniter_Migration\Providers\CodeigniterServiceProvider',
+   ...
+    ];
 ```
 
 
-### CI-Configuration
+### Facade
+
+You have to use the facade, add it to the aliases array in your app config
+
+
+```php
+'aliases' => [
+   ...
+    'CodeigniterSession' => 'Ci2Lara\Codeigniter_Migration\Facades\CodeigniterSession',  
+   ...
+    ];
+```
+
+
+
+### Configuration (e.g. CI-Cookie-Name)
 
 Copy the package config to your local config with the publish command:
 
