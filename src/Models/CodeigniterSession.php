@@ -12,11 +12,12 @@ class CodeigniterSession extends Model
     protected $dates = [];
     protected $table = '';
     protected $primaryKey = 'session_id';
+    protected $connection = 'db_connection';
     
     public function __construct() 
     {
         $this->table = config('ci_session.sess_table_name');
-        
+        $this->connection = config('ci_session.db_connection');
     }
     
     public function isValid()
