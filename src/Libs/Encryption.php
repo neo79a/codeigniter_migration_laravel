@@ -1,4 +1,6 @@
 <?php
+namespace Ci2Lara\Codeigniter_Migration\Libs;
+
 /**
  * CodeIgniter
  *
@@ -13,8 +15,6 @@
  * @filesource
  */
 
-namespace Ci2Lara\Codeigniter_Migration\Services\Libs;
-
 // ------------------------------------------------------------------------
 
 /**
@@ -28,7 +28,7 @@ namespace Ci2Lara\Codeigniter_Migration\Services\Libs;
  * @author		ExpressionEngine Dev Team
  * @link		http://codeigniter.com/user_guide/libraries/encryption.html
  */
-class CI_Encryption {
+class Encryption {
 
     var $encryption_key	= '';
     var $_hash_type	= 'sha1';

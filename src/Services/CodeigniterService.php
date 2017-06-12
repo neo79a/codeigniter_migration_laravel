@@ -3,7 +3,7 @@ namespace Ci2Lara\Codeigniter_Migration\Services;
 
 use Cookie;
 use Ci2Lara\Codeigniter_Migration\Models\CodeigniterSession;
-use Ci2Lara\Codeigniter_Migration\Libs\CI_Encryption;
+use Ci2Lara\Codeigniter_Migration\Libs\Encryption;
 
 class CodeigniterService
 {
@@ -14,7 +14,7 @@ class CodeigniterService
         $cookieValue = Cookie::get($cookieName);
 
         if(config('ci_session.encrypt_cookie') && config('ci_session.encryption_key')) {
-            $cookieValue = (new CI_Encryption())->decode($cookieValue, config('ci_session.encryption_key'));
+            $cookieValue = (new Encryption())->decode($cookieValue, config('ci_session.encryption_key'));
         }
 
         try {
