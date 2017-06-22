@@ -45,7 +45,6 @@ class Encryption {
     public function __construct()
     {
         $this->_mcrypt_exists = ( ! function_exists('mcrypt_encrypt')) ? FALSE : TRUE;
-        logger("Encrypt Class Initialized");
     }
 
     // --------------------------------------------------------------------
