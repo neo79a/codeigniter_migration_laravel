@@ -1,14 +1,14 @@
 <?php
 namespace Ci2Lara\Codeigniter_Migration\Services;
 
-use Cookie;
+use Illuminate\Support\Facades\Cookie;
 use Ci2Lara\Codeigniter_Migration\Models\CodeigniterSession;
 use Ci2Lara\Codeigniter_Migration\Libs\Encryption;
 
 class CodeigniterService
 {
 
-    public function __construct() 
+    public function __construct()
     {
         $cookieName = config('ci_session.sess_cookie_name');
         $cookieValue = Cookie::get($cookieName);
