@@ -17,15 +17,16 @@ class CodeigniterService
             $cookieValue = (new Encryption())->decode($cookieValue, config('ci_session.encryption_key'));
         }
 
-        try {
-            $ciSession = unserialize($cookieValue);
+        $ciSession = unserialize($cookieValue);
 
-            if (isset($ciSession) && isset($ciSession['session_id'])) {
-                $sess = CodeigniterSession::find($ciSession['session_id']);
-                $this->setUserData($sess);
-            }
-        } catch (Exception $e) {
-            dd($e->getMessage());
+        if (isset($ciSession) && isset($ciSession['session_id'])) {
+            $sess = CodeigniterSession::find($ciSession['session_id']);
+            $this->setUserData($sess);
+        } else {
+            warning('Could not read session ID from Cookie', [
+                'cookieName' => $cookieName,
+                'cookieValue' => $cookieValue
+            ]);
         }
     }
 
@@ -38,7 +39,7 @@ class CodeigniterService
 
     public function getUserData()
     {
-        if (isset($this->userData)) {
+        if (isset($this->userData) && !empty($this->userData)) {
             return $this->userData;
         } else {
             return null;
@@ -53,7 +54,4 @@ class CodeigniterService
             return null;
         }
     }
-
-
-    
 }
