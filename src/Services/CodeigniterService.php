@@ -34,7 +34,9 @@ class CodeigniterService
     public function setUserData($data)
     {
         $this->sessionData = $data;
-        $this->userData = unserialize($this->sessionData->user_data);
+        if(isset($this->sessionData->user_data)) {
+            $this->userData = unserialize($this->sessionData->user_data);
+        }
     }
 
     public function getUserData()
