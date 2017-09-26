@@ -20,13 +20,14 @@ class CodeigniterService
         $ciSession = unserialize($cookieValue);
 
         if (isset($ciSession) && isset($ciSession['session_id'])) {
-            $sess = CodeigniterSession::find($ciSession['session_id']);
-            $this->setUserData($sess);
-        } else {
-            warning('Could not read session ID from Cookie', [
-                'cookieName' => $cookieName,
-                'cookieValue' => $cookieValue
-            ]);
+            try {
+                $sess = CodeigniterSession::find($ciSession['session_id']);
+                $this->setUserData($sess);
+            } catch (Exception $e) {
+                warning('Legacy Session error', [
+                    'exception' => $e->getMessage()
+                ]);
+            }
         }
     }
 
