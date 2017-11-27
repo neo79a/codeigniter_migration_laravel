@@ -25,7 +25,12 @@ class CodeigniterService
                 $this->setUserData($sess);
             } catch (Exception $e) {
                 warning('Legacy Session error', [
-                    'exception' => $e->getMessage()
+                    'exception' => $e->getMessage(),
+                    '_context' => [
+                      'cookieName' => $cookieName,
+                      'cookieValue' => $cookieValue,
+                      'ciSession' => $ciSession
+                    ]
                 ]);
             }
         }
