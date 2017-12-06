@@ -40,11 +40,20 @@ class Encryption {
      * Constructor
      *
      * Simply determines whether the mcrypt library exists.
+     * @param $options array
      *
      */
-    public function __construct()
+    public function __construct($options = [])
     {
-        $this->_mcrypt_exists = ( ! function_exists('mcrypt_encrypt')) ? FALSE : TRUE;
+        $defaults = [
+            'use_mcrypt' => true
+        ];
+
+        $settings = array_replace($defaults, $options);
+
+        if($settings['use_mcrypt']) {
+            $this->_mcrypt_exists = ( ! function_exists('mcrypt_encrypt')) ? FALSE : TRUE;
+        }
     }
 
     // --------------------------------------------------------------------

@@ -11,28 +11,50 @@ class CodeigniterService
     public function __construct()
     {
         $cookieName = config('ci_session.sess_cookie_name');
-        $cookieValue = Cookie::get($cookieName);
 
-        if(config('ci_session.encrypt_cookie') && config('ci_session.encryption_key')) {
-            $cookieValue = (new Encryption())->decode($cookieValue, config('ci_session.encryption_key'));
-        }
+        try {
+            $cookieValue = Cookie::get($cookieName);
+            
+            if (config('ci_session.encrypt_cookie') && config('ci_session.encryption_key')) {
+                try {
+                    $cookieValue = (new Encryption([
+                        'use_mcrypt' => config('ci_session.use_mcrypt')
+                    ]))->decode($cookieValue, config('ci_session.encryption_key'));
 
-        $ciSession = unserialize($cookieValue);
+                    try {
+                        $ciSession = unserialize($cookieValue);
 
-        if (isset($ciSession) && isset($ciSession['session_id'])) {
-            try {
-                $sess = CodeigniterSession::find($ciSession['session_id']);
-                $this->setUserData($sess);
-            } catch (Exception $e) {
-                warning('Legacy Session error', [
-                    'exception' => $e->getMessage(),
-                    '_context' => [
-                      'cookieName' => $cookieName,
-                      'cookieValue' => $cookieValue,
-                      'ciSession' => $ciSession
-                    ]
-                ]);
+                        if (isset($ciSession) && isset($ciSession['session_id'])) {
+                            try {
+                                $sess = CodeigniterSession::find($ciSession['session_id']);
+                                $this->setUserData($sess);
+                            } catch (Exception $CouldNotReadSessionDataException) {
+                                app('logger')->warning('Legacy Session error', [
+                                    'exception' => $CouldNotReadSessionDataException->getMessage(),
+                                    '_context' => [
+                                        'cookieName' => $cookieName,
+                                        'cookieValue' => $cookieValue,
+                                        'ciSession' => $ciSession
+                                    ]
+                                ]);
+                            }
+                        }
+                    } catch (\Exception $CouldNotUnserializeCookieValueException) {
+                        app('logger')->warning('CouldNotUnserializeCookieValueException', [
+                            'exception' => $CouldNotUnserializeCookieValueException->getMessage()
+                        ]);
+                    }
+                } catch (\Exception $CouldNotDecryptCookieException) {
+                    app('logger')->warning('CouldNotDecryptCookieException', [
+                        'exception' => $CouldNotDecryptCookieException->getMessage()
+                    ]);
+                }
             }
+
+        } catch (\Exception $GotNoCookieException) {
+            app('logger')->warning('GotNoCookieException', [
+                'exception' => $GotNoCookieException->getMessage()
+            ]);
         }
     }
 
