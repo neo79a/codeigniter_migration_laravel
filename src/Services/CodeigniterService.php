@@ -29,7 +29,7 @@ class CodeigniterService
                                 $sess = CodeigniterSession::find($ciSession['session_id']);
                                 $this->setUserData($sess);
                             } catch (Exception $CouldNotReadSessionDataException) {
-                                app('logger')->warning('Legacy Session error', [
+                                app('log')->warning('Legacy Session error', [
                                     'exception' => $CouldNotReadSessionDataException->getMessage(),
                                     '_context' => [
                                         'cookieName' => $cookieName,
@@ -40,19 +40,19 @@ class CodeigniterService
                             }
                         }
                     } catch (\Exception $CouldNotUnserializeCookieValueException) {
-                        app('logger')->warning('CouldNotUnserializeCookieValueException', [
+                        app('log')->warning('CouldNotUnserializeCookieValueException', [
                             'exception' => $CouldNotUnserializeCookieValueException->getMessage()
                         ]);
                     }
                 } catch (\Exception $CouldNotDecryptCookieException) {
-                    app('logger')->warning('CouldNotDecryptCookieException', [
+                    app('log')->warning('CouldNotDecryptCookieException', [
                         'exception' => $CouldNotDecryptCookieException->getMessage()
                     ]);
                 }
             }
 
         } catch (\Exception $GotNoCookieException) {
-            app('logger')->warning('GotNoCookieException', [
+            app('log')->warning('GotNoCookieException', [
                 'exception' => $GotNoCookieException->getMessage()
             ]);
         }
